@@ -14,7 +14,7 @@ key = "0205060752F3E1F2132435465B6C7D88"
 pt = st.sidebar.text_input("Plaintext in hexadecimal", pt)
 key = st.sidebar.text_input("Key in hexadecimal", key)
 
-
+NR = st.sidebar.slider("Rounds", 1, 16, 12, 1)
 
 def encrypt(m, k):
     m = list(bytearray.fromhex(m))
@@ -24,8 +24,8 @@ def encrypt(m, k):
     m = np.array([m[i*4:(i+1)*4] for i in range(4)])
     k = np.array([k[i*4:(i+1)*4] for i in range(4)])
 
-    ct = obj.Mysterion128(k, m)
-    cpt = obj.InvMysterion128(ct, k)
+    ct = obj.Mysterion128(k, m, NR)
+    cpt = obj.InvMysterion128(ct, k, NR)
 
     h_ct = ""
     for i in ct:

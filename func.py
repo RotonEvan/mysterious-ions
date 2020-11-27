@@ -206,11 +206,11 @@ def ShiftColumns_128_inv(State):
     output = output.reshape(4,4)
     return output
 
-def Mysterion128(key, m):
+def Mysterion128(key, m, NR):
   # adding key initially 
   state = np.array( [x ^ y for x, y in zip(key, m)] )
 
-  for round in range(1, 12 + 1):
+  for round in range(1, NR + 1):
     # spliting message in blocks 
     blocks = [state[i*4:(i+1)*4] for i in range(4)]
     # S-box
@@ -228,8 +228,8 @@ def Mysterion128(key, m):
     state = np.array( [x ^ k ^ c for x, k, c in zip(state, key, constant)] )
   return state 
 
-def InvMysterion128(state, key):
-  for round in range(12, 0, -1):
+def InvMysterion128(state, key, NR):
+  for round in range(NR, 0, -1):
     constant = roundconst(round)
     state = np.array( [x ^ k ^ c for x, k, c in zip(state, key, constant)] )
 
