@@ -11,8 +11,10 @@ st.sidebar.markdown("Mysterion Block Cipher Encrypt-Decrypt Tool")
 pt = "01010000B2C3D4E5F60718293A4B5C6D"
 key = "0205060752F3E1F2132435465B6C7D88"
 
-st.sidebar.text_input("Plaintext in hexadecimal", pt)
-st.sidebar.text_input("Key in hexadecimal", key)
+pt = st.sidebar.text_input("Plaintext in hexadecimal", pt)
+key = st.sidebar.text_input("Key in hexadecimal", key)
+
+
 
 def encrypt(m, k):
     m = list(bytearray.fromhex(m))
