@@ -18,8 +18,12 @@ def encrypt(m, k):
     m = list(bytearray.fromhex(m))
     k = list(bytearray.fromhex(k))
 
-    ct = obj.Mysterion128(k, m)
-    cpt = obj.InvMysterion128(ct, k)
+    # spliting message in blocks 
+    m = np.array([m[i*4:(i+1)*4] for i in range(4)])
+    k = np.array([k[i*4:(i+1)*4] for i in range(4)])
+
+    ct = Mysterion128(k, m)
+    cpt = InvMysterion128(ct, k)
 
     h_ct = ""
     for i in ct:

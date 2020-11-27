@@ -211,6 +211,8 @@ def Mysterion128(key, m):
   state = np.array( [x ^ y for x, y in zip(key, m)] )
 
   for round in range(1, 12 + 1):
+    # spliting message in blocks 
+    blocks = [state[i*4:(i+1)*4] for i in range(4)]
     # S-box
     blocks = np.array([Sbox(block) for block in state])
 
